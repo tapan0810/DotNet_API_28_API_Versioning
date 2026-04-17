@@ -15,7 +15,7 @@ namespace DotNet_API_28.Services
             return students;
         }
 
-        public Student GetStudentById(int id)
+        public Student GetById(int id)
         {
             return students.FirstOrDefault(x => x.Id == id)!;
         }
