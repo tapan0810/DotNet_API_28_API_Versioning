@@ -7,12 +7,12 @@ namespace DotNet_API_28.Controllers.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    public class StudentsController : ControllerBase
+    [Route("api/v1{version:apiVersion}/students")]
+    public class StudentV1Controller : ControllerBase
     {
         private readonly IStudentService _studentService;
 
-        public StudentsController(IStudentService studentService)
+        public StudentV1Controller(IStudentService studentService)
         {
             _studentService = studentService;
         }
@@ -34,7 +34,7 @@ namespace DotNet_API_28.Controllers.V1
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var student = _studentService.GetStudentById(id);
+            var student = _studentService.GetById(id);
             if (student == null)
             {
                 return NotFound($"Student with Id {id} not found.");

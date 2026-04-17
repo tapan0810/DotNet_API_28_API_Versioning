@@ -1,6 +1,7 @@
 using DotNet_API_28.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddApiVersioning(options =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<IStudentService, StudentService>();
 
@@ -25,8 +26,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // ? Map OpenAPI JSON
+    app.MapOpenApi();
+
+    // ? Scalar UI
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
